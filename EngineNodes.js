@@ -77,15 +77,13 @@ function draw() {
   for (let xDots = 0; xDots < 16; xDots++){
     for (let yDots = 0; yDots < 10; yDots++){
       push();
-      if(abs(mouseX-width/2) < 10 && abs(mouseY-height/2) < 10){
-        noStroke();
-      }else{
+
         stroke(240);
         strokeWeight(1);
-        ellipse(xDots*64 + 33, yDots*64 + 33, 64,64);
+        //ellipse(xDots*64 + 33, yDots*64 + 33, 64,64);
         stroke(2);
         strokeWeight(2);
-      }
+
       BGBubblesX[(xDots*10)+yDots] = BGBubblesX[(xDots*10)+yDots] + BGBubbleSpeed[(xDots*10)+yDots];
       point(xDots*64+32 + 32*sin(BGBubblesX[(xDots*10)+yDots]), yDots*64+32 + 32*cos(BGBubblesX[(xDots*10)+yDots]));
       pop();
@@ -142,19 +140,16 @@ function draw() {
       }else{
         strokeWeight(1);
       }
-      ellipse(BubbleX[i],BubbleY[i],BubbleDiameter[i]*2,BubbleDiameter[i]*2);
+      //ellipse(BubbleX[i],BubbleY[i],BubbleDiameter[i]*2,BubbleDiameter[i]*2);
       stroke(255,100,130,150);
       line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[j],BubbleOrbitY[j]);
      }
     }
 
-    if (BubbleDiameter[i] % 2 == 0){ //SPIN HALF OF THE NODES CLOCK-WISE
-      BubbleOrbitX[i] = BubbleDiameter[i]*sin((frameCount/BubbleDiameter[i]/m)+BubbleDiameter[i]/m)+BubbleX[i];
-      BubbleOrbitY[i] = BubbleDiameter[i]*cos((frameCount/BubbleDiameter[i]/m)+BubbleDiameter[i]/m)+BubbleY[i];
-    }else{ //SPIN HALF OF THE NODES COUNTER-CLOCK-WISE
-      BubbleOrbitX[i] = BubbleDiameter[i]*sin((-frameCount/BubbleDiameter[i]/m)+BubbleDiameter[i]/m)+BubbleX[i];
-      BubbleOrbitY[i] = BubbleDiameter[i]*cos((-frameCount/BubbleDiameter[i]/m)+BubbleDiameter[i]/m)+BubbleY[i];
-    }if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
+      BubbleOrbitX[i] = BubbleX[i]
+      BubbleOrbitY[i] = BubbleY[i]
+
+    if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
       push();
       noStroke();
       fill(0);
@@ -208,17 +203,4 @@ function draw() {
       BubbleX[i] = BubbleX[i] + BubbleMoveX[i]
       BubbleY[i] = BubbleY[i] + BubbleMoveY[i]
   }
-  strokeWeight(3);
-  stroke(0);
-  ellipse(width/2,height/2,10,10);
-
-  if(abs(mouseX-width/2) < 10 && abs(mouseY-height/2) < 10){
-        push();
-        textSize(100);
-        textAlign(CENTER);
-        //background(255,50);
-        fill(0);
-        text("ENGINE",width/2, height/2+32); //IF MOUSE PRESSED OVER CENTER NODE - ADD WHITE OVERLAY AND SHOW 'ENGINE' TEXT
-        pop();
-      }
 }
