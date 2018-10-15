@@ -41,7 +41,7 @@ function setup() {
   for (let xDots = 0; xDots < 60; xDots++){
     for (let yDots = 0; yDots < 40; yDots++){
       BGBubblesX.push(random(0,6));
-      BGBubbleSpeed.push(random(-.02,.02));
+      BGBubbleSpeed.push(random(-.04,.04));
     }
   }
 
@@ -189,17 +189,17 @@ function draw() {
           line(BubbleOrbitX[i],BubbleOrbitY[i],BGNodeX[BGnodes],BGNodeY[BGnodes]);
       }
     }
-    if (BubbleX[i] < 0 + BubbleDiameter[i]*2){
+    if (BubbleX[i] < 0 + BubbleDiameter[i]){
       BubbleX[i] = BubbleX[i]+1;
       BubbleMoveX[i] = BubbleMoveX[i]*-1
-    }else if (BubbleX[i] > width - BubbleDiameter[i]*2){
+    }else if (BubbleX[i] > width - BubbleDiameter[i]){
       BubbleX[i] = BubbleX[i]-1;
       BubbleMoveX[i] = BubbleMoveX[i]*-1
     }
-    if (BubbleY[i] < 0 + BubbleDiameter[i]*2){
+    if (BubbleY[i] < 0 + BubbleDiameter[i]){
       BubbleY[i] = BubbleY[i]+1;
       BubbleMoveY[i] = BubbleMoveY[i]*-1
-    }else if (BubbleY[i] > height - BubbleDiameter[i]*2){
+    }else if (BubbleY[i] > height - BubbleDiameter[i]){
       BubbleY[i] = BubbleY[i]-1;
       BubbleMoveY[i] = BubbleMoveY[i]*-1
     }
