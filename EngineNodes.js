@@ -35,7 +35,8 @@ let BubbleMoveX = [];
 let BubbleMoveY = [];
 
 function setup() {
-  createCanvas(1025,641);
+  createCanvas(windowWidth, windowHeight);
+  //createCanvas(1025,641);
 
   for (let xDots = 0; xDots < 16; xDots++){
     for (let yDots = 0; yDots < 10; yDots++){
@@ -74,6 +75,7 @@ function setup() {
 function draw() {
   background(255);
 
+
   for (let xDots = 0; xDots < 16; xDots++){
     for (let yDots = 0; yDots < 10; yDots++){
       push();
@@ -87,24 +89,63 @@ function draw() {
       BGBubblesX[(xDots*10)+yDots] = BGBubblesX[(xDots*10)+yDots] + BGBubbleSpeed[(xDots*10)+yDots];
       point(xDots*64+32 + 32*sin(BGBubblesX[(xDots*10)+yDots]), yDots*64+32 + 32*cos(BGBubblesX[(xDots*10)+yDots]));
       pop();
-      BGNodeX[(xDots*10)+yDots] = xDots*64+32 + 32*sin(BGBubblesX[(xDots*10)+yDots]);
-      BGNodeY[(xDots*10)+yDots] = yDots*64+32 + 32*cos(BGBubblesX[(xDots*10)+yDots]);
+      BGNodeX[(xDots*10)+yDots] = int(xDots*64+32 + 32*sin(BGBubblesX[(xDots*10)+yDots]));
+      BGNodeY[(xDots*10)+yDots] = int(yDots*64+32 + 32*cos(BGBubblesX[(xDots*10)+yDots]));
+      push();
+      stroke(230);
+      strokeWeight(1);
+
+        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots+1]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots+1]) < 50){
+
+          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10)+yDots+1],BGNodeY[(xDots*10)+yDots+1]);
+        }
+        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots-1]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots-1]) < 50){
+
+          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10)+yDots-1],BGNodeY[(xDots*10)+yDots-1]);
+        }
+        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots+10]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots+10]) < 50){
+
+          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10)+yDots+10],BGNodeY[(xDots*10)+yDots+10]);
+        }
+        /*
+        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots+11]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots+11]) < 50){
+          push();
+          stroke(230);
+          strokeWeight(1);
+          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10+11)+yDots],BGNodeY[(xDots*10+11)+yDots]);
+        }
+        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots+9]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots+9]) < 50){
+          push();
+          stroke(230);
+          strokeWeight(1);
+          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots+9],BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots+9]);
+        }
+        */
+        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots-10]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots-10]) < 50){
+
+          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10)+yDots-10],BGNodeY[(xDots*10)+yDots-10]);
+        }
+        /*
+        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots-11]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots-11]) < 50){
+          push();
+          stroke(230);
+          strokeWeight(1);
+          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10-11)+yDots],BGNodeY[(xDots*10-11)+yDots]);
+        }
+        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots-9]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots-9]) < 50){
+          push();
+          stroke(230);
+          strokeWeight(1);
+          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots-9],BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots-9]);
+        }
+        */
+
+        pop();
+
+
     }
   }
 
-  for (let BGNodesi = 0; BGNodesi < 160; BGNodesi++){
-    //ellipse(BGNodeX[BGNodesi],BGNodeY[BGNodesi],10,10);
-    for (let BGNodesj = 0; BGNodesj < BGNodeX.length; BGNodesj++){
-
-
-      if (abs(BGNodeX[BGNodesi]-BGNodeX[BGNodesj]) < 50 && abs(BGNodeY[BGNodesi]-BGNodeY[BGNodesj]) < 50){
-        push();
-        stroke(230);
-        strokeWeight(1);
-        line(BGNodeX[BGNodesi],BGNodeY[BGNodesi],BGNodeX[BGNodesj],BGNodeY[BGNodesj]);
-      }
-     }
-   }
 
   strokeWeight(1);
   noFill();
@@ -149,6 +190,7 @@ function draw() {
       BubbleOrbitX[i] = BubbleX[i]
       BubbleOrbitY[i] = BubbleY[i]
 
+
     if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
       push();
       noStroke();
@@ -175,6 +217,8 @@ function draw() {
           BubbleY[i] = BubbleY[i]+((mouseY-pmouseY));
         }
     }
+
+
 
     stroke(100);
     ellipse(BubbleOrbitX[i], BubbleOrbitY[i],10,10); //DRAW A LINE BETWEEN ALL THE NODES
@@ -203,4 +247,8 @@ function draw() {
       BubbleX[i] = BubbleX[i] + BubbleMoveX[i]
       BubbleY[i] = BubbleY[i] + BubbleMoveY[i]
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
