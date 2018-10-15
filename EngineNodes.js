@@ -38,8 +38,8 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   //createCanvas(1025,641);
 
-  for (let xDots = 0; xDots < 16; xDots++){
-    for (let yDots = 0; yDots < 10; yDots++){
+  for (let xDots = 0; xDots < 60; xDots++){
+    for (let yDots = 0; yDots < 40; yDots++){
       BGBubblesX.push(random(0,6));
       BGBubbleSpeed.push(random(-.05,.05));
     }
@@ -75,68 +75,74 @@ function setup() {
 function draw() {
   background(255);
 
+  let xWin = int(width/64);
+  let yWin = int(height/64);
+  console.log(xWin + ", " + yWin);
 
-  for (let xDots = 0; xDots < 16; xDots++){
-    for (let yDots = 0; yDots < 10; yDots++){
+
+  for (let xDots = 0; xDots < xWin; xDots++){
+    for (let yDots = 0; yDots < yWin; yDots++){
       push();
 
-        stroke(240);
+        stroke(250);
         strokeWeight(1);
-        //ellipse(xDots*64 + 33, yDots*64 + 33, 64,64);
+        ellipse(xDots*64 + 33, yDots*64 + 33, 64,64);
         stroke(2);
         strokeWeight(2);
 
-      BGBubblesX[(xDots*10)+yDots] = BGBubblesX[(xDots*10)+yDots] + BGBubbleSpeed[(xDots*10)+yDots];
-      point(xDots*64+32 + 32*sin(BGBubblesX[(xDots*10)+yDots]), yDots*64+32 + 32*cos(BGBubblesX[(xDots*10)+yDots]));
+      BGBubblesX[(xDots*(int(xWin)))+yDots] = BGBubblesX[(xDots*(int(xWin)))+yDots] + BGBubbleSpeed[(xDots*(int(xWin)))+yDots];
+      //point(xDots*64 + 33, yDots*64 + 33, 64,64);
+      point(xDots*64+32 + 32*sin(BGBubblesX[(xDots*(int(xWin)))+yDots]), yDots*64+32 + 32*cos(BGBubblesX[(xDots*(int(xWin)))+yDots]));
       pop();
-      BGNodeX[(xDots*10)+yDots] = int(xDots*64+32 + 32*sin(BGBubblesX[(xDots*10)+yDots]));
-      BGNodeY[(xDots*10)+yDots] = int(yDots*64+32 + 32*cos(BGBubblesX[(xDots*10)+yDots]));
+      BGNodeX[(xDots*(int(xWin)))+yDots] = int(xDots*64+32 + 32*sin(BGBubblesX[(xDots*(int(xWin)))+yDots]));
+      BGNodeY[(xDots*(int(xWin)))+yDots] = int(yDots*64+32 + 32*cos(BGBubblesX[(xDots*(int(xWin)))+yDots]));
       push();
       stroke(230);
       strokeWeight(1);
+      //console.log(BGBubblesX.length);
 
-        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots+1]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots+1]) < 50){
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+1]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+1]) < 50){
 
-          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10)+yDots+1],BGNodeY[(xDots*10)+yDots+1]);
+          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots+1],BGNodeY[(xDots*(int(xWin)))+yDots+1]);
         }
-        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots-1]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots-1]) < 50){
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-1]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-1]) < 50){
 
-          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10)+yDots-1],BGNodeY[(xDots*10)+yDots-1]);
+          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots-1],BGNodeY[(xDots*(int(xWin)))+yDots-1]);
         }
-        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots+10]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots+10]) < 50){
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+(int(xWin))]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+(int(xWin))]) < 50){
 
-          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10)+yDots+10],BGNodeY[(xDots*10)+yDots+10]);
+          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots+(int(xWin))],BGNodeY[(xDots*(int(xWin)))+yDots+(int(xWin))]);
         }
         /*
-        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots+11]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots+11]) < 50){
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+11]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+11]) < 50){
           push();
           stroke(230);
           strokeWeight(1);
-          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10+11)+yDots],BGNodeY[(xDots*10+11)+yDots]);
+          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*10+11)+yDots],BGNodeY[(xDots*10+11)+yDots]);
         }
-        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots+9]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots+9]) < 50){
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+9]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+9]) < 50){
           push();
           stroke(230);
           strokeWeight(1);
-          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots+9],BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots+9]);
+          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots+9],BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots+9]);
         }
         */
-        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots-10]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots-10]) < 50){
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-(int(xWin))]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-(int(xWin))]) < 50){
 
-          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10)+yDots-10],BGNodeY[(xDots*10)+yDots-10]);
+          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots-(int(xWin))],BGNodeY[(xDots*(int(xWin)))+yDots-(int(xWin))]);
         }
         /*
-        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots-11]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots-11]) < 50){
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-11]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-11]) < 50){
           push();
           stroke(230);
           strokeWeight(1);
-          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots],BGNodeX[(xDots*10-11)+yDots],BGNodeY[(xDots*10-11)+yDots]);
+          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*10-11)+yDots],BGNodeY[(xDots*10-11)+yDots]);
         }
-        if (abs(BGNodeX[(xDots*10)+yDots]-BGNodeX[(xDots*10)+yDots-9]) < 50 && abs(BGNodeY[(xDots*10)+yDots]-BGNodeY[(xDots*10)+yDots-9]) < 50){
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-9]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-9]) < 50){
           push();
           stroke(230);
           strokeWeight(1);
-          line(BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots-9],BGNodeX[(xDots*10)+yDots],BGNodeY[(xDots*10)+yDots-9]);
+          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots-9],BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots-9]);
         }
         */
 
