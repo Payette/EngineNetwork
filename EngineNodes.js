@@ -41,7 +41,7 @@ function setup() {
   for (let xDots = 0; xDots < 60; xDots++){
     for (let yDots = 0; yDots < 40; yDots++){
       BGBubblesX.push(random(0,6));
-      BGBubbleSpeed.push(random(-.05,.05));
+      BGBubbleSpeed.push(random(-.02,.02));
     }
   }
 
@@ -64,30 +64,27 @@ function setup() {
     }
   }
   for (let i=0; i<numBubbles; i++){
-    BubbleMoveX.push(random(-1,1));
-    BubbleMoveY.push(random(-1,1));
+    BubbleMoveX.push(random(-.5,.5));
+    BubbleMoveY.push(random(-.5,.5));
     let dia = int(random(30,70));
     BubbleDiameter.push(dia);
   }
 }
-
 
 function draw() {
   background(255);
 
   let xWin = int(width/64);
   let yWin = int(height/64);
-  console.log(xWin + ", " + yWin);
-
 
   for (let xDots = 0; xDots < xWin; xDots++){
     for (let yDots = 0; yDots < yWin; yDots++){
       push();
 
-        stroke(250);
+        stroke(220);
         strokeWeight(1);
-        ellipse(xDots*64 + 33, yDots*64 + 33, 64,64);
-        stroke(2);
+        //ellipse(xDots*64 + 33, yDots*64 + 33, 64,64);
+        stroke(150);
         strokeWeight(2);
 
       BGBubblesX[(xDots*(int(xWin)))+yDots] = BGBubblesX[(xDots*(int(xWin)))+yDots] + BGBubbleSpeed[(xDots*(int(xWin)))+yDots];
@@ -99,56 +96,19 @@ function draw() {
       push();
       stroke(230);
       strokeWeight(1);
-      //console.log(BGBubblesX.length);
-
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+1]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+1]) < 50){
-
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+1]) < 40 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+1]) < 40){
           line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots+1],BGNodeY[(xDots*(int(xWin)))+yDots+1]);
         }
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-1]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-1]) < 50){
-
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-1]) < 40 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-1]) < 40){
           line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots-1],BGNodeY[(xDots*(int(xWin)))+yDots-1]);
         }
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+(int(xWin))]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+(int(xWin))]) < 50){
-
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+(int(xWin))]) < 40 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+(int(xWin))]) < 40){
           line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots+(int(xWin))],BGNodeY[(xDots*(int(xWin)))+yDots+(int(xWin))]);
         }
-        /*
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+11]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+11]) < 50){
-          push();
-          stroke(230);
-          strokeWeight(1);
-          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*10+11)+yDots],BGNodeY[(xDots*10+11)+yDots]);
-        }
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+9]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+9]) < 50){
-          push();
-          stroke(230);
-          strokeWeight(1);
-          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots+9],BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots+9]);
-        }
-        */
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-(int(xWin))]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-(int(xWin))]) < 50){
-
+        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-(int(xWin))]) < 40 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-(int(xWin))]) < 40){
           line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots-(int(xWin))],BGNodeY[(xDots*(int(xWin)))+yDots-(int(xWin))]);
         }
-        /*
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-11]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-11]) < 50){
-          push();
-          stroke(230);
-          strokeWeight(1);
-          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*10-11)+yDots],BGNodeY[(xDots*10-11)+yDots]);
-        }
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-9]) < 50 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-9]) < 50){
-          push();
-          stroke(230);
-          strokeWeight(1);
-          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots-9],BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots-9]);
-        }
-        */
-
         pop();
-
-
     }
   }
 
@@ -168,7 +128,7 @@ function draw() {
       fill(0);
       smallNodeX[SNArray] = BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i);
       smallNodeY[SNArray] = BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i);
-      ellipse(BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i), BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i),5,5);
+      ellipse(BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i), BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i),3,3);
       stroke(200);
       line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[i]+smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i), BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i))
       pop();
@@ -178,33 +138,32 @@ function draw() {
       if (i != j){ // DONT LET THE BUBBLES GET TOO CLOSE
 
         if(abs(BubbleX[i]-BubbleX[j]) < BubbleDiameter[i]+BubbleDiameter[j] && abs(BubbleY[i]-BubbleY[j]) < BubbleDiameter[i]+BubbleDiameter[j]){
-          BubbleX[j] = BubbleX[j] - (BubbleX[i]-BubbleX[j])*.005;
-          BubbleY[j] = BubbleY[j] - (BubbleY[i]-BubbleY[j])*.005;
+          BubbleX[j] = BubbleX[j] - (BubbleX[i]-BubbleX[j])*.001;
+          BubbleY[j] = BubbleY[j] - (BubbleY[i]-BubbleY[j])*.001;
       }
-      stroke(200);
-      if(abs(mouseX-width/2) < 10 && abs(mouseY-height/2) < 10){
-        noStroke();
-      }else{
+
         strokeWeight(1);
-      }
-      //ellipse(BubbleX[i],BubbleY[i],BubbleDiameter[i]*2,BubbleDiameter[i]*2);
-      stroke(255,100,130,150);
+        stroke(abs(BubbleX[i]-BubbleX[j])/(width/200)+100);
+
       line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[j],BubbleOrbitY[j]);
+      line(BubbleOrbitX[i],BubbleOrbitY[i],width/2,height/2);
+
+      if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
+        push();
+        stroke(255,100,130);
+        strokeWeight(3);
+        line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[j],BubbleOrbitY[j]);
+        line(BubbleOrbitX[i],BubbleOrbitY[i],width/2,height/2);
+        pop();
+      }
      }
     }
-
       BubbleOrbitX[i] = BubbleX[i]
       BubbleOrbitY[i] = BubbleY[i]
 
 
     if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
-      push();
-      noStroke();
-      fill(0);
-      textSize(12);
-      text(nameArray[i],BubbleOrbitX[i], BubbleOrbitY[i]);
-      pop();
-      let smallNodeArray = [];
+        let smallNodeArray = [];
       for (let item = 0; item < smallNode.length; item++){
         if (smallNode[item].link == i){
           smallNodeArray.push(smallNode[item].name)
@@ -213,8 +172,8 @@ function draw() {
       for (let SNArray = 0; SNArray < smallNodeArray.length; SNArray++){
         push();
         noStroke();
-        fill(0);
-        textSize(8);
+        fill(110);
+        textSize(9);
         text(smallNodeArray[SNArray], BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i), BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i));
         pop();
       }
@@ -224,18 +183,12 @@ function draw() {
         }
     }
 
-
-
-    stroke(100);
-    ellipse(BubbleOrbitX[i], BubbleOrbitY[i],10,10); //DRAW A LINE BETWEEN ALL THE NODES
-
-    for (let BGnodes = 0; BGnodes < 160; BGnodes++){
+    for (let BGnodes = 0; BGnodes < BGNodeX.length; BGnodes++){
         if (abs(BubbleOrbitX[i] - BGNodeX[BGnodes]) < 55 &&  abs(BubbleOrbitY[i] - BGNodeY[BGnodes]) < 55){
           stroke(200);
           line(BubbleOrbitX[i],BubbleOrbitY[i],BGNodeX[BGnodes],BGNodeY[BGnodes]);
       }
     }
-
     if (BubbleX[i] < 0 + BubbleDiameter[i]*2){
       BubbleX[i] = BubbleX[i]+1;
       BubbleMoveX[i] = BubbleMoveX[i]*-1
@@ -253,6 +206,36 @@ function draw() {
       BubbleX[i] = BubbleX[i] + BubbleMoveX[i]
       BubbleY[i] = BubbleY[i] + BubbleMoveY[i]
   }
+  for(let i = 0; i< numBubbles; i++){
+    stroke(0);
+    push();
+    fill('yellow');
+    strokeWeight(1);
+    ellipse(BubbleOrbitX[i], BubbleOrbitY[i],8,8); //DRAW A LINE BETWEEN ALL THE NODES
+    pop();
+
+  if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
+    push();
+    noStroke();
+    fill(0);
+    textSize(12);
+    text(nameArray[i],BubbleOrbitX[i], BubbleOrbitY[i]);
+    pop();
+  }
+}
+stroke(70);
+strokeWeight(2);
+fill(255);
+ellipse(width/2,height/2,10,10);
+if(abs(mouseX-width/2) < 10 && abs(mouseY-height/2) < 10){
+  push();
+        textSize(width/4);
+        textAlign(CENTER);
+        background(255,200);
+
+        text("ENGINE",width/2, height/2+(height/8)); //IF MOUSE PRESSED OVER CENTER NODE - ADD WHITE OVERLAY AND SHOW 'ENGINE' TEXT
+        pop();
+}
 }
 
 function windowResized() {
