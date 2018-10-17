@@ -77,7 +77,7 @@ function draw() {
   push();
   strokeWeight(1);
   stroke(60);
-  rect(1,1,width-2,height-2);
+  rect(1,1,width-4,height-4);
   pop();
 
 
