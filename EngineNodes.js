@@ -42,21 +42,21 @@ function setup() {
   for (let xDots = 0; xDots < 60; xDots++){
     for (let yDots = 0; yDots < 40; yDots++){
       BGBubblesX.push(random(0,6));
-      BGBubbleSpeed.push(random(-.04,.04));
+      BGBubbleSpeed.push(random(-.02,.02));
     }
   }
 
   for (let i=0; i<numBubbles; i++){
     if (i%2 == 0){
-      let x = random(width*(1/7), width*(4/7));
+      let x = random(width*(1/7), width*(3/7));
       BubbleX.push(x);
     }else{
-    let x = random(width*(3/7), width*(6/7));
+    let x = random(width*(4/7), width*(6/7));
     BubbleX.push(x);
   }
   }
   for (let i=0; i<numBubbles; i++){
-    if(i%2 == 1){
+    if(i%3 == 1){
       let y = random(height*(1/6), height*(3/6));
       BubbleY.push(y);
     }else{
@@ -99,10 +99,10 @@ function draw() {
     for (let yDots = 0; yDots < yWin; yDots++){
       push();
 
-        stroke(220);
+        stroke(255);
         strokeWeight(1);
         //ellipse(xDots*64 + 33, yDots*64 + 33, 64,64);
-        stroke(150);
+        stroke(250);
         strokeWeight(2);
 
       BGBubblesX[(xDots*(int(xWin)))+yDots] = BGBubblesX[(xDots*(int(xWin)))+yDots] + BGBubbleSpeed[(xDots*(int(xWin)))+yDots];
@@ -178,6 +178,8 @@ function draw() {
     }
       BubbleOrbitX[i] = BubbleX[i]
       BubbleOrbitY[i] = BubbleY[i]
+
+
       push();
       noStroke();
       let myAlpha = 10;
@@ -208,7 +210,7 @@ function draw() {
       pop();
 
 
-    if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
+    if (abs(mouseX - BubbleOrbitX[i]) < 35 && abs(mouseY - BubbleOrbitY[i]) < 35){
         let smallNodeArray = [];
       for (let item = 0; item < smallNode.length; item++){
         if (smallNode[item].link == i){
