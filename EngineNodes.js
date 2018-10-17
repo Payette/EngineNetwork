@@ -3,8 +3,9 @@ let nameArray = ["Building Science", "Visualization", "Fabrication", "Computatio
 let smallNode = [
   {name:"Research + Tools", link:0},
   {name:"Simulation", link:0},
-  {name:"2030 Challenge", link:0},
   {name:"VR + AR", link:1},
+  {name:"Rendering", link:1},
+  {name:"Animation", link:1},
   {name:"CNC Machining", link:2},
   {name:"3D Printing", link:2},
   {name:"Laser Cutting", link:2},
@@ -73,6 +74,12 @@ function setup() {
 
 function draw() {
   background(255);
+  push();
+  strokeWeight(3);
+  stroke(0);
+  rect(1,1,width-2,height-2);
+  pop();
+
 
   let xWin = int(width/64);
   let yWin = int(height/64);
@@ -146,20 +153,48 @@ function draw() {
         stroke(abs(BubbleX[i]-BubbleX[j])/(width/200)+100);
 
       line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[j],BubbleOrbitY[j]);
-      line(BubbleOrbitX[i],BubbleOrbitY[i],width/2,height/2);
+      //line(BubbleOrbitX[i],BubbleOrbitY[i],width/2,height/2);
 
       if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
         push();
         stroke(255,100,130);
         strokeWeight(3);
         line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[j],BubbleOrbitY[j]);
-        line(BubbleOrbitX[i],BubbleOrbitY[i],width/2,height/2);
+        //line(BubbleOrbitX[i],BubbleOrbitY[i],width/2,height/2);
         pop();
       }
      }
     }
       BubbleOrbitX[i] = BubbleX[i]
       BubbleOrbitY[i] = BubbleY[i]
+      push();
+      noStroke();
+      let myAlpha = 10;
+      fill(202,31,123,myAlpha);
+      triangle(BubbleOrbitX[0],BubbleOrbitY[0],BubbleOrbitX[1],BubbleOrbitY[1],BubbleOrbitX[2],BubbleOrbitY[2]);
+      fill(164,1,88,myAlpha);
+      triangle(BubbleOrbitX[0],BubbleOrbitY[0],BubbleOrbitX[2],BubbleOrbitY[2],BubbleOrbitX[3],BubbleOrbitY[3]);
+      fill(126,0,68,myAlpha);
+      triangle(BubbleOrbitX[0],BubbleOrbitY[0],BubbleOrbitX[3],BubbleOrbitY[3],BubbleOrbitX[4],BubbleOrbitY[4]);
+
+      fill(240,73,163,myAlpha);
+      triangle(BubbleOrbitX[0],BubbleOrbitY[0],BubbleOrbitX[2],BubbleOrbitY[2],BubbleOrbitX[4],BubbleOrbitY[4]);
+      fill(255,116,191,myAlpha);
+      triangle(BubbleOrbitX[0],BubbleOrbitY[0],BubbleOrbitX[1],BubbleOrbitY[1],BubbleOrbitX[3],BubbleOrbitY[3]);
+      fill(255,154,208,myAlpha);
+      triangle(BubbleOrbitX[0],BubbleOrbitY[0],BubbleOrbitX[1],BubbleOrbitY[1],BubbleOrbitX[4],BubbleOrbitY[4]);
+
+      fill(202,31,66,myAlpha);
+      triangle(BubbleOrbitX[1],BubbleOrbitY[1],BubbleOrbitX[2],BubbleOrbitY[2],BubbleOrbitX[3],BubbleOrbitY[3]);
+      fill(202,31,152,myAlpha);
+      triangle(BubbleOrbitX[1],BubbleOrbitY[1],BubbleOrbitX[2],BubbleOrbitY[2],BubbleOrbitX[4],BubbleOrbitY[4]);
+      fill(202,31,180,myAlpha);
+      triangle(BubbleOrbitX[1],BubbleOrbitY[1],BubbleOrbitX[3],BubbleOrbitY[3],BubbleOrbitX[4],BubbleOrbitY[4]);
+
+      fill(87,0,47,myAlpha);
+      triangle(BubbleOrbitX[2],BubbleOrbitY[2],BubbleOrbitX[3],BubbleOrbitY[3],BubbleOrbitX[4],BubbleOrbitY[4]);
+
+      pop();
 
 
     if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
@@ -226,7 +261,8 @@ function draw() {
 stroke(70);
 strokeWeight(2);
 fill(255);
-ellipse(width/2,height/2,10,10);
+//ellipse(width/2,height/2,10,10);
+/*
 if(abs(mouseX-width/2) < 10 && abs(mouseY-height/2) < 10){
   push();
         textSize(width/4);
@@ -236,6 +272,7 @@ if(abs(mouseX-width/2) < 10 && abs(mouseY-height/2) < 10){
         text("ENGINE",width/2, height/2+(height/8)); //IF MOUSE PRESSED OVER CENTER NODE - ADD WHITE OVERLAY AND SHOW 'ENGINE' TEXT
         pop();
 }
+*/
 }
 
 function windowResized() {
