@@ -75,8 +75,8 @@ function setup() {
 function draw() {
   background(255);
   push();
-  strokeWeight(3);
-  stroke(0);
+  strokeWeight(1);
+  stroke(60);
   rect(1,1,width-2,height-2);
   pop();
 
