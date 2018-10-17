@@ -77,6 +77,7 @@ function draw() {
   push();
   strokeWeight(1);
   stroke(60);
+  fill(220,26,85);
   rect(1,1,width-4,height-4);
   pop();
 
@@ -207,7 +208,7 @@ function draw() {
       for (let SNArray = 0; SNArray < smallNodeArray.length; SNArray++){
         push();
         noStroke();
-        fill(110);
+        fill(210);
         textSize(9);
         text(smallNodeArray[SNArray], BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i), BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i));
         pop();
@@ -252,7 +253,7 @@ function draw() {
   if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
     push();
     noStroke();
-    fill(0);
+    fill(255);
     textSize(12);
     text(nameArray[i],BubbleOrbitX[i], BubbleOrbitY[i]);
     pop();
