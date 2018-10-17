@@ -65,21 +65,31 @@ function setup() {
     }
   }
   for (let i=0; i<numBubbles; i++){
-    BubbleMoveX.push(random(-.5,.5));
-    BubbleMoveY.push(random(-.5,.5));
+    let myX = random(-.3,.3);
+    if (abs(myX)<.1){
+      myX = myX*2
+    }
+    let myY = random(-.3,.3);
+    if (abs(myY)<.1){
+      myY = myY*2
+    }
+    BubbleMoveX.push(random(myX));
+    BubbleMoveY.push(random(myY));
     let dia = int(random(30,70));
     BubbleDiameter.push(dia);
   }
 }
 
 function draw() {
-  background(255);
+  background(220,26,85);
+  /*
   push();
   strokeWeight(1);
   stroke(60);
   fill(220,26,85);
   rect(1,1,width-4,height-4);
   pop();
+  */
 
 
   let xWin = int(width/64);
@@ -102,7 +112,7 @@ function draw() {
       BGNodeX[(xDots*(int(xWin)))+yDots] = int(xDots*64+32 + 32*sin(BGBubblesX[(xDots*(int(xWin)))+yDots]));
       BGNodeY[(xDots*(int(xWin)))+yDots] = int(yDots*64+32 + 32*cos(BGBubblesX[(xDots*(int(xWin)))+yDots]));
       push();
-      stroke(230);
+      stroke(200);
       strokeWeight(1);
         if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+1]) < 40 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+1]) < 40){
           line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots+1],BGNodeY[(xDots*(int(xWin)))+yDots+1]);
@@ -133,7 +143,7 @@ function draw() {
     for (let SNArray = 0; SNArray < smallNodeArray.length; SNArray++){
       push();
       noStroke();
-      fill(0);
+      fill(255);
       smallNodeX[SNArray] = BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i);
       smallNodeY[SNArray] = BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i);
       ellipse(BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i), BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i),3,3);
