@@ -27,7 +27,9 @@ let infectionX = [];
 let infectionY = [];
 let infectionMoveX = [];
 let infectionMoveY = [];
-let infectionNum = 9;
+let infectionNum = 8;
+
+let infectionArray = [[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]],[[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -96,74 +98,86 @@ function setup() {
     }
     infectionMoveX.push(random(myX));
     infectionMoveY.push(random(myY));
-    let dia = int(random(30,190));
+    let dia = int(random(330,590));
     infectionDiameter.push(dia);
   }
 }
 
 function draw() {
-  background(240);
+  background(255);
 
   for (let i=0; i<infectionNum; i++){
-    if (infectionX[i] < 0){
-      infectionX[i] = infectionX[i]+1;
-      infectionMoveX[i] = infectionMoveX[i]*-1
-    }else if (infectionX[i] > width){
-      infectionX[i] = infectionX[i]-1;
-      infectionMoveX[i] = infectionMoveX[i]*-1
-    }
-    if (infectionY[i] < 0){
-      infectionY[i] = infectionY[i]+1;
-      infectionMoveY[i] = infectionMoveY[i]*-1
-    }else if (infectionY[i] > height){
-      infectionY[i] = infectionY[i]-1;
-      infectionMoveY[i] = infectionMoveY[i]*-1
-    }
-      infectionX[i] = infectionX[i] + infectionMoveX[i]
-      infectionY[i] = infectionY[i] + infectionMoveY[i]
+    // if (infectionX[i] < 0){
+    //   infectionX[i] = infectionX[i]+1;
+    //   infectionMoveX[i] = infectionMoveX[i]*-1
+    // }else if (infectionX[i] > width){
+    //   infectionX[i] = infectionX[i]-1;
+    //   infectionMoveX[i] = infectionMoveX[i]*-1
+    // }
+    // if (infectionY[i] < 0){
+    //   infectionY[i] = infectionY[i]+1;
+    //   infectionMoveY[i] = infectionMoveY[i]*-1
+    // }else if (infectionY[i] > height){
+    //   infectionY[i] = infectionY[i]-1;
+    //   infectionMoveY[i] = infectionMoveY[i]*-1
+    // }
+    //   infectionX[i] = infectionX[i] + infectionMoveX[i]
+    //   infectionY[i] = infectionY[i] + infectionMoveY[i]
       //ellipse(infectionX[i],infectionY[i],infectionDiameter[i],infectionDiameter[i]);
       push();
-      stroke(255);
+      stroke(250);
       strokeWeight(3);
-      let i1X = infectionX[i]+infectionDiameter[i]/2*sin(.001*frameCount+208*(1/i));
-      let i1Y = infectionY[i]+infectionDiameter[i]/2*cos(.001*frameCount+208*(1/i));
-      let i2X = infectionX[i]+infectionDiameter[i]/2*sin(-.007*frameCount+408*(1/i));
-      let i2Y = infectionY[i]+infectionDiameter[i]/2*cos(-.007*frameCount+408*(1/i));
-      let i3X = infectionX[i]+infectionDiameter[i]/2*sin(-.002*frameCount*(1/i));
-      let i3Y = infectionY[i]+infectionDiameter[i]/2*cos(-.002*frameCount*(1/i));
-      let i4X = infectionX[i]+infectionDiameter[i]/2*sin(.0013*frameCount+1132*(1/i));
-      let i4Y = infectionY[i]+infectionDiameter[i]/2*cos(.0013*frameCount+1132*(1/i));
-      let i5X = infectionX[i]+infectionDiameter[i]/2*sin(-.0015*frameCount+55*(1/i));
-      let i5Y = infectionY[i]+infectionDiameter[i]/2*cos(-.0015*frameCount+55*(1/i));
+      let i1X = infectionX[i]+infectionDiameter[i]/2*sin(.001*frameCount+208*(2.2/i));
+      infectionArray[i][0][0] = i1X
+      let i1Y = infectionY[i]+infectionDiameter[i]/2*cos(.001*frameCount+208*(2.2/i));
+      infectionArray[i][0][1] = i1Y
+      let i2X = infectionX[i]+infectionDiameter[i]/2*sin(-.0007*frameCount+408*(2.2/i));
+      infectionArray[i][1][0] = i2X
+      let i2Y = infectionY[i]+infectionDiameter[i]/2*cos(-.0007*frameCount+408*(2.2/i));
+      infectionArray[i][1][1] = i2Y
+      let i3X = infectionX[i]+infectionDiameter[i]/2*sin(-.002*frameCount*(2.2/i));
+      infectionArray[i][2][0] = i3X
+      let i3Y = infectionY[i]+infectionDiameter[i]/2*cos(-.002*frameCount*(2.2/i));
+      infectionArray[i][2][1] = i3Y
+      let i4X = infectionX[i]+infectionDiameter[i]/2*sin(.0013*frameCount+1132*(2.2/i));
+      infectionArray[i][3][0] = i4X
+      let i4Y = infectionY[i]+infectionDiameter[i]/2*cos(.0013*frameCount+1132*(2.2/i));
+      infectionArray[i][3][1] = i4Y
+      let i5X = infectionX[i]+infectionDiameter[i]/2*sin(-.0015*frameCount+55*(2.2/i));
+      infectionArray[i][4][0] = i5X
+      let i5Y = infectionY[i]+infectionDiameter[i]/2*cos(-.0015*frameCount+55*(2.2/i));
+      infectionArray[i][4][1] = i5Y
       let i6X = infectionX[i]+infectionDiameter[i]/2*sin(-.001*frameCount+1320*(1/i));
+      infectionArray[i][5][0] = i6X
       let i6Y = infectionY[i]+infectionDiameter[i]/2*cos(-.001*frameCount+1320*(1/i));
+      infectionArray[i][5][1] = i6Y
       point(infectionX[i]+infectionDiameter[i]/2*sin(.001*frameCount+208*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(.001*frameCount+208*(1/i)));
       point(infectionX[i]+infectionDiameter[i]/2*sin(-.007*frameCount+408*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(-.007*frameCount+408*(1/i)));
       point(infectionX[i]+infectionDiameter[i]/2*sin(-.002*frameCount*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(-.002*frameCount*(1/i)));
       point(infectionX[i]+infectionDiameter[i]/2*sin(.0013*frameCount+1132*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(.0013*frameCount+1132*(1/i)));
       point(infectionX[i]+infectionDiameter[i]/2*sin(-.0015*frameCount+55*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(-.0015*frameCount+55*(1/i)));
-      //point(infectionX[i]+infectionDiameter[i]/2*sin(-.001*frameCount+1320*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(-.001*frameCount+1320*(1/i)));
-      strokeWeight(1);
+      point(infectionX[i]+infectionDiameter[i]/2*sin(-.001*frameCount+1320*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(-.001*frameCount+1320*(1/i)));
+      strokeWeight(3);
 
       line(i1X,i1Y,i2X,i2Y);
       line(i1X,i1Y,i3X,i3Y);
       line(i1X,i1Y,i4X,i4Y);
       line(i1X,i1Y,i5X,i5Y);
-      //line(i1X,i1Y,i6X,i6Y);
+      line(i1X,i1Y,i6X,i6Y);
 
       line(i2X,i2Y,i3X,i3Y);
       line(i2X,i2Y,i4X,i4Y);
       line(i2X,i2Y,i5X,i5Y);
-      //line(i2X,i2Y,i6X,i6Y);
+      line(i2X,i2Y,i6X,i6Y);
 
       line(i3X,i3Y,i4X,i4Y);
       line(i3X,i3Y,i5X,i5Y);
-      //line(i3X,i3Y,i6X,i6Y);
+      line(i3X,i3Y,i6X,i6Y);
 
       line(i4X,i4Y,i5X,i5Y);
-      //line(i4X,i4Y,i6X,i6Y);
+      line(i4X,i4Y,i6X,i6Y);
 
-      //line(i5X,i5Y,i6X,i6Y);
+      line(i5X,i5Y,i6X,i6Y);
       pop();
   }
 
@@ -215,13 +229,6 @@ function draw() {
 
       line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[j],BubbleOrbitY[j]);
 
-      if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
-        push();
-        stroke(255,100,130);
-        strokeWeight(3);
-        line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[j],BubbleOrbitY[j]);
-        pop();
-      }
      }
     }
       BubbleOrbitX[i] = BubbleX[i]
@@ -258,11 +265,11 @@ function draw() {
       pop();
 
 
-
-    for (let BGnodes = 0; BGnodes < BGNodeX.length; BGnodes++){
-        if (abs(BubbleOrbitX[i] - BGNodeX[BGnodes]) < 55 &&  abs(BubbleOrbitY[i] - BGNodeY[BGnodes]) < 55){
+      for(let floaties = 0; floaties < infectionArray.length; floaties++)
+    for (let BGnodes = 0; BGnodes < infectionArray[0].length; BGnodes++){
+        if (abs(BubbleOrbitX[i] - infectionArray[floaties][BGnodes][0]) < 100 &&  abs(BubbleOrbitY[i] - infectionArray[floaties][BGnodes][1]) < 100){
           stroke(200);
-          line(BubbleOrbitX[i],BubbleOrbitY[i],BGNodeX[BGnodes],BGNodeY[BGnodes]);
+          line(BubbleOrbitX[i],BubbleOrbitY[i],infectionArray[floaties][BGnodes][0],infectionArray[floaties][BGnodes][1]);
       }
     }
     if (BubbleX[i] < 0 + BubbleDiameter[i]){
