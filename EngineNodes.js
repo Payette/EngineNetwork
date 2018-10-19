@@ -319,7 +319,7 @@ fill(255);
 
 push();
 noStroke();
-fill(255);
+fill(205);
 rect(width-4,0,width,height);
 noFill();
 stroke(0);
