@@ -105,6 +105,11 @@ function setup() {
 
 function draw() {
   background(255);
+  push();
+  stroke(0);
+  strokeWeight(1);
+  rect(1,1,width-3,height-3);
+  pop();
 
   for (let i=0; i<infectionNum; i++){
     // if (infectionX[i] < 0){
