@@ -1,18 +1,5 @@
 let numBubbles = 5;
 let nameArray = ["Building Science", "Visualization", "Fabrication", "Computation", "Data Analytics"];
-let smallNode = [
-  {name:"Research + Tools", link:0},
-  {name:"Simulation", link:0},
-  {name:"VR + AR", link:1},
-  {name:"Rendering", link:1},
-  {name:"Animation", link:1},
-  {name:"CNC Machining", link:2},
-  {name:"3D Printing", link:2},
-  {name:"Laser Cutting", link:2},
-  {name:"Parametric Design", link:3},
-  {name:"Scripting", link:3},
-  {name:"Interactive Graphics", link:4}
-];
 
 let BubbleDiameter = [];
 let smallDiameter = 30;
@@ -35,9 +22,15 @@ let smallNodeY = [];
 let BubbleMoveX = [];
 let BubbleMoveY = [];
 
+let infectionDiameter = [];
+let infectionX = [];
+let infectionY = [];
+let infectionMoveX = [];
+let infectionMoveY = [];
+let infectionNum = 9;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  //createCanvas(1025,641);
 
   for (let xDots = 0; xDots < 60; xDots++){
     for (let yDots = 0; yDots < 40; yDots++){
@@ -78,18 +71,102 @@ function setup() {
     let dia = int(random(30,70));
     BubbleDiameter.push(dia);
   }
+
+
+
+
+
+  for (let i=0; i<infectionNum; i++){
+      let x = random(width);
+      infectionX.push(x);
+    }
+    for (let i=0; i<infectionNum; i++){
+        let y = random(height);
+        infectionY.push(y);
+      }
+
+  for (let i=0; i<infectionNum; i++){
+    let myX = random(-.1,.1);
+    if (abs(myX)<.1){
+      myX = myX*2
+    }
+    let myY = random(-.1,.1);
+    if (abs(myY)<.1){
+      myY = myY*5
+    }
+    infectionMoveX.push(random(myX));
+    infectionMoveY.push(random(myY));
+    let dia = int(random(30,190));
+    infectionDiameter.push(dia);
+  }
 }
 
 function draw() {
-  background(220,26,85);
-  /*
-  push();
-  strokeWeight(1);
-  stroke(60);
-  fill(220,26,85);
-  rect(1,1,width-4,height-4);
-  pop();
-  */
+  background(240);
+
+  for (let i=0; i<infectionNum; i++){
+    if (infectionX[i] < 0){
+      infectionX[i] = infectionX[i]+1;
+      infectionMoveX[i] = infectionMoveX[i]*-1
+    }else if (infectionX[i] > width){
+      infectionX[i] = infectionX[i]-1;
+      infectionMoveX[i] = infectionMoveX[i]*-1
+    }
+    if (infectionY[i] < 0){
+      infectionY[i] = infectionY[i]+1;
+      infectionMoveY[i] = infectionMoveY[i]*-1
+    }else if (infectionY[i] > height){
+      infectionY[i] = infectionY[i]-1;
+      infectionMoveY[i] = infectionMoveY[i]*-1
+    }
+      infectionX[i] = infectionX[i] + infectionMoveX[i]
+      infectionY[i] = infectionY[i] + infectionMoveY[i]
+      //ellipse(infectionX[i],infectionY[i],infectionDiameter[i],infectionDiameter[i]);
+      push();
+      stroke(255);
+      strokeWeight(3);
+      let i1X = infectionX[i]+infectionDiameter[i]/2*sin(.001*frameCount+208*(1/i));
+      let i1Y = infectionY[i]+infectionDiameter[i]/2*cos(.001*frameCount+208*(1/i));
+      let i2X = infectionX[i]+infectionDiameter[i]/2*sin(-.007*frameCount+408*(1/i));
+      let i2Y = infectionY[i]+infectionDiameter[i]/2*cos(-.007*frameCount+408*(1/i));
+      let i3X = infectionX[i]+infectionDiameter[i]/2*sin(-.002*frameCount*(1/i));
+      let i3Y = infectionY[i]+infectionDiameter[i]/2*cos(-.002*frameCount*(1/i));
+      let i4X = infectionX[i]+infectionDiameter[i]/2*sin(.0013*frameCount+1132*(1/i));
+      let i4Y = infectionY[i]+infectionDiameter[i]/2*cos(.0013*frameCount+1132*(1/i));
+      let i5X = infectionX[i]+infectionDiameter[i]/2*sin(-.0015*frameCount+55*(1/i));
+      let i5Y = infectionY[i]+infectionDiameter[i]/2*cos(-.0015*frameCount+55*(1/i));
+      let i6X = infectionX[i]+infectionDiameter[i]/2*sin(-.001*frameCount+1320*(1/i));
+      let i6Y = infectionY[i]+infectionDiameter[i]/2*cos(-.001*frameCount+1320*(1/i));
+      point(infectionX[i]+infectionDiameter[i]/2*sin(.001*frameCount+208*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(.001*frameCount+208*(1/i)));
+      point(infectionX[i]+infectionDiameter[i]/2*sin(-.007*frameCount+408*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(-.007*frameCount+408*(1/i)));
+      point(infectionX[i]+infectionDiameter[i]/2*sin(-.002*frameCount*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(-.002*frameCount*(1/i)));
+      point(infectionX[i]+infectionDiameter[i]/2*sin(.0013*frameCount+1132*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(.0013*frameCount+1132*(1/i)));
+      point(infectionX[i]+infectionDiameter[i]/2*sin(-.0015*frameCount+55*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(-.0015*frameCount+55*(1/i)));
+      //point(infectionX[i]+infectionDiameter[i]/2*sin(-.001*frameCount+1320*(1/i)),infectionY[i]+infectionDiameter[i]/2*cos(-.001*frameCount+1320*(1/i)));
+      strokeWeight(1);
+
+      line(i1X,i1Y,i2X,i2Y);
+      line(i1X,i1Y,i3X,i3Y);
+      line(i1X,i1Y,i4X,i4Y);
+      line(i1X,i1Y,i5X,i5Y);
+      //line(i1X,i1Y,i6X,i6Y);
+
+      line(i2X,i2Y,i3X,i3Y);
+      line(i2X,i2Y,i4X,i4Y);
+      line(i2X,i2Y,i5X,i5Y);
+      //line(i2X,i2Y,i6X,i6Y);
+
+      line(i3X,i3Y,i4X,i4Y);
+      line(i3X,i3Y,i5X,i5Y);
+      //line(i3X,i3Y,i6X,i6Y);
+
+      line(i4X,i4Y,i5X,i5Y);
+      //line(i4X,i4Y,i6X,i6Y);
+
+      //line(i5X,i5Y,i6X,i6Y);
+      pop();
+  }
+
 
 
   let xWin = int(width/64);
@@ -101,56 +178,29 @@ function draw() {
 
         stroke(255);
         strokeWeight(1);
-        //ellipse(xDots*64 + 33, yDots*64 + 33, 64,64);
         stroke(250);
-        strokeWeight(2);
+        strokeWeight(3);
 
       BGBubblesX[(xDots*(int(xWin)))+yDots] = BGBubblesX[(xDots*(int(xWin)))+yDots] + BGBubbleSpeed[(xDots*(int(xWin)))+yDots];
-      //point(xDots*64 + 33, yDots*64 + 33, 64,64);
-      point(xDots*64+32 + 32*sin(BGBubblesX[(xDots*(int(xWin)))+yDots]), yDots*64+32 + 32*cos(BGBubblesX[(xDots*(int(xWin)))+yDots]));
+
+
       pop();
       BGNodeX[(xDots*(int(xWin)))+yDots] = int(xDots*64+32 + 32*sin(BGBubblesX[(xDots*(int(xWin)))+yDots]));
       BGNodeY[(xDots*(int(xWin)))+yDots] = int(yDots*64+32 + 32*cos(BGBubblesX[(xDots*(int(xWin)))+yDots]));
       push();
       stroke(200);
-      strokeWeight(1);
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+1]) < 40 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+1]) < 40){
-          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots+1],BGNodeY[(xDots*(int(xWin)))+yDots+1]);
-        }
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-1]) < 40 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-1]) < 40){
-          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots-1],BGNodeY[(xDots*(int(xWin)))+yDots-1]);
-        }
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots+(int(xWin))]) < 40 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots+(int(xWin))]) < 40){
-          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots+(int(xWin))],BGNodeY[(xDots*(int(xWin)))+yDots+(int(xWin))]);
-        }
-        if (abs(BGNodeX[(xDots*(int(xWin)))+yDots]-BGNodeX[(xDots*(int(xWin)))+yDots-(int(xWin))]) < 40 && abs(BGNodeY[(xDots*(int(xWin)))+yDots]-BGNodeY[(xDots*(int(xWin)))+yDots-(int(xWin))]) < 40){
-          line(BGNodeX[(xDots*(int(xWin)))+yDots],BGNodeY[(xDots*(int(xWin)))+yDots],BGNodeX[(xDots*(int(xWin)))+yDots-(int(xWin))],BGNodeY[(xDots*(int(xWin)))+yDots-(int(xWin))]);
-        }
+      strokeWeight(3);
+
+
         pop();
     }
   }
 
 
-  strokeWeight(1);
+  strokeWeight(3);
   noFill();
   for(let i = 0; i< numBubbles; i++){
-    let smallNodeArray = [];
-    for (let item = 0; item < smallNode.length; item++){
-      if (smallNode[item].link == i){
-        smallNodeArray.push(smallNode[item].name)
-      }
-    }
-    for (let SNArray = 0; SNArray < smallNodeArray.length; SNArray++){
-      push();
-      noStroke();
-      fill(255);
-      smallNodeX[SNArray] = BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i);
-      smallNodeY[SNArray] = BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i);
-      ellipse(BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i), BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i),3,3);
-      stroke(200);
-      line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[i]+smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i), BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i))
-      pop();
-    }
+
 
     for(let j = 0; j< numBubbles; j++){
       if (i != j){ // DONT LET THE BUBBLES GET TOO CLOSE
@@ -160,18 +210,16 @@ function draw() {
           BubbleY[j] = BubbleY[j] - (BubbleY[i]-BubbleY[j])*.001;
       }
 
-        strokeWeight(1);
+        strokeWeight(3);
         stroke(abs(BubbleX[i]-BubbleX[j])/(width/200)+100);
 
       line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[j],BubbleOrbitY[j]);
-      //line(BubbleOrbitX[i],BubbleOrbitY[i],width/2,height/2);
 
       if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
         push();
         stroke(255,100,130);
         strokeWeight(3);
         line(BubbleOrbitX[i],BubbleOrbitY[i],BubbleOrbitX[j],BubbleOrbitY[j]);
-        //line(BubbleOrbitX[i],BubbleOrbitY[i],width/2,height/2);
         pop();
       }
      }
@@ -210,26 +258,6 @@ function draw() {
       pop();
 
 
-    if (abs(mouseX - BubbleOrbitX[i]) < 35 && abs(mouseY - BubbleOrbitY[i]) < 35){
-        let smallNodeArray = [];
-      for (let item = 0; item < smallNode.length; item++){
-        if (smallNode[item].link == i){
-          smallNodeArray.push(smallNode[item].name)
-        }
-      }
-      for (let SNArray = 0; SNArray < smallNodeArray.length; SNArray++){
-        push();
-        noStroke();
-        fill(210);
-        textSize(9);
-        text(smallNodeArray[SNArray], BubbleOrbitX[i]+ smallDiameter*sin((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i), BubbleOrbitY[i] + smallDiameter*cos((-frameCount/smallDiameter/m)+smallDiameter/m+(SNArray*4)+i));
-        pop();
-      }
-      if (mouseIsPressed){ // IF THE MOUSE IS WITHIN 25px OF THE NODE AND CLICKED, IT FOLLOWS THE MOUSE
-          BubbleX[i] =BubbleX[i]+((mouseX-pmouseX));
-          BubbleY[i] = BubbleY[i]+((mouseY-pmouseY));
-        }
-    }
 
     for (let BGnodes = 0; BGnodes < BGNodeX.length; BGnodes++){
         if (abs(BubbleOrbitX[i] - BGNodeX[BGnodes]) < 55 &&  abs(BubbleOrbitY[i] - BGNodeY[BGnodes]) < 55){
@@ -257,16 +285,16 @@ function draw() {
   for(let i = 0; i< numBubbles; i++){
     stroke(0);
     push();
-    fill('yellow');
-    strokeWeight(1);
-    ellipse(BubbleOrbitX[i], BubbleOrbitY[i],8,8); //DRAW A LINE BETWEEN ALL THE NODES
+    fill(90);
+    noStroke();
+    ellipse(BubbleOrbitX[i], BubbleOrbitY[i],18,18); //DRAW A LINE BETWEEN ALL THE NODES
     pop();
 
   if (abs(mouseX - BubbleOrbitX[i]) < 25 && abs(mouseY - BubbleOrbitY[i]) < 25){
     push();
     noStroke();
-    fill(255);
-    textSize(12);
+    fill(60);
+    textSize(22);
     text(nameArray[i],BubbleOrbitX[i], BubbleOrbitY[i]);
     pop();
   }
@@ -274,18 +302,7 @@ function draw() {
 stroke(70);
 strokeWeight(2);
 fill(255);
-//ellipse(width/2,height/2,10,10);
-/*
-if(abs(mouseX-width/2) < 10 && abs(mouseY-height/2) < 10){
-  push();
-        textSize(width/4);
-        textAlign(CENTER);
-        background(255,200);
 
-        text("ENGINE",width/2, height/2+(height/8)); //IF MOUSE PRESSED OVER CENTER NODE - ADD WHITE OVERLAY AND SHOW 'ENGINE' TEXT
-        pop();
-}
-*/
 }
 
 function windowResized() {
