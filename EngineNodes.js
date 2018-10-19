@@ -63,12 +63,12 @@ function setup() {
     }
   }
   for (let i=0; i<numBubbles; i++){
-    let myX = random(-.2,.2);
-    if (abs(myX)<.1){
+    let myX = random(-.1,.1);
+    if (abs(myX)<.05){
       myX = myX*2
     }
-    let myY = random(-.2,.2);
-    if (abs(myY)<.1){
+    let myY = random(-.1,.1);
+    if (abs(myY)<.05){
       myY = myY*2
     }
     BubbleMoveX.push(random(myX));
