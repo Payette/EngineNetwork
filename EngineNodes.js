@@ -103,7 +103,7 @@ function setup() {
     }
     infectionMoveX.push(random(myX));
     infectionMoveY.push(random(myY));
-    let dia = int(random(height/2.5,height/1.5));
+    let dia = int(random(height/2.25,height/1.3));
     infectionDiameter.push(dia);
 
 
